@@ -12,22 +12,22 @@ End-to-end data engineering project for **NYC Yellow Taxi** trip records. It cov
 
 ## 📁 Project Structure
 NYC-Taxi-DataPipeline/
-├── README.md                           # Project documentation
-├── images/
-│   └── DataModel.png                   # Star schema / data model diagram
-├── notebooks/
-│   ├── ETL_Final.ipynb                 # ETL pipeline (cleaning & transformations)
-│   └── Taxi_Data_Profiling.ipynb       # Data profiling notebook
-├── sql/
-│   └── ddl_dw_taxi.sql                 # Data warehouse DDL (fact + dimensions)
-├── data/
-│   └── taxi_zones.csv                  # TLC Taxi zones metadata
-└── docs/
-├── data_dictionary_trip_records_yellow.pdf  # Data dictionary
-├── DataProfiling.html                        # Auto profiling report
-├── Data_Profiling.xlsx                       # Profiling summary
-├── Taxi_DataPipeline_doc_StepByStep.docx     # Deployment guide
-└── NYC_Taxi.pptx                             # Project presentation
+```├── README.md                           # Project documentation```
+```├── images/```
+```│   └── DataModel.png                   # Star schema / data model diagram```
+```├── notebooks/```
+```│   ├── ETL_Final.ipynb                 # ETL pipeline (cleaning & transformations)```
+```│   └── Taxi_Data_Profiling.ipynb       # Data profiling notebook```
+```├── sql/```
+```│   └── ddl_dw_taxi.sql                 # Data warehouse DDL (fact + dimensions)```
+```├── data/```
+```│   └── taxi_zones.csv                  # TLC Taxi zones metadata```
+```└── docs/```
+```├── data_dictionary_trip_records_yellow.pdf  # Data dictionary```
+```├── DataProfiling.html                        # Auto profiling report```
+```├── Data_Profiling.xlsx                       # Profiling summary```
+```├── Taxi_DataPipeline_doc_StepByStep.docx     # Deployment guide```
+```└── NYC_Taxi.pptx                             # Project presentation```
 
 ---
 
@@ -43,22 +43,22 @@ NYC-Taxi-DataPipeline/
 ---
 ## ☁️ AWS Architecture Overview
 
-Raw Data
-│
-▼
-Amazon S3 (data lake: raw + processed)
-│
-▼
-AWS Glue (ETL) ───▶ AWS Lambda (serverless triggers)
-│
-▼
-Amazon Athena (interactive SQL on S3)
-│
-▼
-Amazon Redshift (data warehouse)
-│
-▼
-Amazon QuickSight ───▶ Tableau / Power BI (dashboards & analytics)
+```Raw Data```
+```│```
+```▼```
+```Amazon S3 (data lake: raw + processed)```
+```│```
+```▼```
+```AWS Glue (ETL) ───▶ AWS Lambda (serverless triggers)```
+```│```
+```▼```
+```Amazon Athena (interactive SQL on S3)```
+```│```
+```▼```
+```Amazon Redshift (data warehouse)```
+```│```
+```▼```
+```Amazon QuickSight ───▶ Tableau / Power BI (dashboards & analytics)```
 
 
 ### 📝 Description
