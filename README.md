@@ -12,23 +12,25 @@ End-to-end data engineering project for **NYC Yellow Taxi** trip records. It cov
 
 ## 📁 Project Structure
 NYC-Taxi-DataPipeline/
-```├── README.md                           # Project documentation```
-```├── images/```
-```│   └── DataModel.png                   # Star schema / data model diagram```
-```├── notebooks/```
-```│   ├── ETL_Final.ipynb                 # ETL pipeline (cleaning & transformations)```
-```│   └── Taxi_Data_Profiling.ipynb       # Data profiling notebook```
-```├── sql/```
-```│   └── ddl_dw_taxi.sql                 # Data warehouse DDL (fact + dimensions)```
-```├── data/```
-```│   └── taxi_zones.csv                  # TLC Taxi zones metadata```
-```└── docs/```
-```├── data_dictionary_trip_records_yellow.pdf  # Data dictionary```
-```├── DataProfiling.html                        # Auto profiling report```
-```├── Data_Profiling.xlsx                       # Profiling summary```
-```├── Taxi_DataPipeline_doc_StepByStep.docx     # Deployment guide```
-```└── NYC_Taxi.pptx                             # Project presentation```
-
+```
+NYC-Taxi-DataPipeline/
+├── README.md                           # Project documentation
+├── images/
+│   └── DataModel.png                   # Star schema / data model diagram
+├── notebooks/
+│   ├── ETL_Final.ipynb                 # ETL pipeline (cleaning & transformations)
+│   └── Taxi_Data_Profiling.ipynb       # Data profiling notebook
+├── sql/
+│   └── ddl_dw_taxi.sql                 # Data warehouse DDL (fact + dimensions)
+├── data/
+│   └── taxi_zones.csv                  # TLC Taxi zones metadata
+└── docs/
+    ├── data_dictionary_trip_records_yellow.pdf  # Data dictionary
+    ├── DataProfiling.html                        # Auto profiling report
+    ├── Data_Profiling.xlsx                       # Profiling summary
+    ├── Taxi_DataPipeline_doc_StepByStep.docx     # Deployment guide
+    └── NYC_Taxi.pptx                             # Project presentation
+```
 ---
 
 ## 🛠️ Technologies Used
@@ -42,24 +44,34 @@ NYC-Taxi-DataPipeline/
 
 ---
 ## ☁️ AWS Architecture Overview
+```
+            ┌────────────┐
+            │  Raw Data  │
+            └─────┬──────┘
+                  │
+                  ▼
+            ┌────────────┐
+            │  Amazon S3 │   (storage for raw + processed data)
+            └─────┬──────┘
+                  │
+         ┌────────┴─────────┐
+         ▼                  ▼
+  ┌──────────────┐    ┌──────────────┐
+  │ AWS Glue ETL │    │ AWS Lambda   │  (transform / serverless triggers)
+  └──────┬───────┘    └──────────────┘
+         │
+         ▼
+ ┌──────────────┐
+ │ Amazon Athena │  (interactive SQL on S3)
+ └──────┬───────┘
+        │
+  ┌─────┴───────────────┐
+  ▼                     ▼
+┌──────────────-─┐     ┌────────────────────┐
+│ Amazon Redshift│     │  Amazon QuickSight │  (dashboards & analytics) + Tableau / Power BI for external BI
+└────────────────┘     └────────────────────┘
 
-```Raw Data```
-```│```
-```▼```
-```Amazon S3 (data lake: raw + processed)```
-```│```
-```▼```
-```AWS Glue (ETL) ───▶ AWS Lambda (serverless triggers)```
-```│```
-```▼```
-```Amazon Athena (interactive SQL on S3)```
-```│```
-```▼```
-```Amazon Redshift (data warehouse)```
-```│```
-```▼```
-```Amazon QuickSight ───▶ Tableau / Power BI (dashboards & analytics)```
-
+```
 
 ### 📝 Description
 This architecture ingests **NYC Taxi Trip data** into an **Amazon S3 data lake**, where raw data is cleaned and transformed by **AWS Glue ETL jobs** (batch) and **Lambda functions** (event-driven). The processed data is cataloged in **AWS Glue Data Catalog** for schema management, enabling SQL-based exploration in **Athena**.  
@@ -93,7 +105,7 @@ For long-term storage and heavy analytics, curated data is loaded into **Amazon 
 
 ## ▶️ Getting Started  
 1. Clone the repository:  
-   ```bash
+   bash
    git clone https://github.com/gagansingh92/NYC-Taxi-DataPipeline.git
    cd NYC-Taxi-DataPipeline
 
