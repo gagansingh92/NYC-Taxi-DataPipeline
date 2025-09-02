@@ -23,21 +23,50 @@ NYC-Taxi-DataPipeline/
 ├── data/
 │   └── taxi_zones.csv                  # TLC Taxi zones metadata
 └── docs/
-	├── data_dictionary_trip_records_yellow.pdf  # Data dictionary
-	├── DataProfiling.html                        # Auto profiling report
-	├── Data_Profiling.xlsx                       # Profiling summary
-	├── Taxi_DataPipeline_doc_StepByStep.docx     # Deployment guide
-	└── NYC_Taxi.pptx                             # Project presentation
+├── data_dictionary_trip_records_yellow.pdf  # Data dictionary
+├── DataProfiling.html                        # Auto profiling report
+├── Data_Profiling.xlsx                       # Profiling summary
+├── Taxi_DataPipeline_doc_StepByStep.docx     # Deployment guide
+└── NYC_Taxi.pptx                             # Project presentation
 
 ---
 
-## 🛠️ Technologies Used  
-- **Python** (Pandas, NumPy, Jupyter)  
-- **Data Profiling** – ydata-profiling (Pandas Profiling)  
-- **SQL** – PostgreSQL / Amazon Redshift schema  
-- **ETL Orchestration** – Apache Airflow / AWS Glue  
-- **Data Storage** – S3 (cloud), CSV (local)  
-- **Analytics & BI** – Tableau / Power BI (DAX measures, semantic modeling)  
+## 🛠️ Technologies Used
+- **Python** → Pandas, NumPy, Jupyter  
+- **Data Profiling** → ydata-profiling (Pandas Profiling)  
+- **SQL** → PostgreSQL, Amazon Redshift  
+- **ETL Orchestration** → Apache Airflow, AWS Glue  
+- **Data Storage** → Amazon S3 (cloud), CSV (local)  
+- **AWS Services** → Lambda, S3, Glue, Athena  
+- **Analytics & BI** → Amazon QuickSight, Tableau, Power BI (DAX measures, semantic modeling)  
+
+---
+## ☁️ AWS Architecture Overview
+
+Raw Data
+│
+▼
+Amazon S3 (data lake: raw + processed)
+│
+▼
+AWS Glue (ETL) ───▶ AWS Lambda (serverless triggers)
+│
+▼
+Amazon Athena (interactive SQL on S3)
+│
+▼
+Amazon Redshift (data warehouse)
+│
+▼
+Amazon QuickSight ───▶ Tableau / Power BI (dashboards & analytics)
+
+
+### 📝 Description
+This architecture ingests **NYC Taxi Trip data** into an **Amazon S3 data lake**, where raw data is cleaned and transformed by **AWS Glue ETL jobs** (batch) and **Lambda functions** (event-driven). The processed data is cataloged in **AWS Glue Data Catalog** for schema management, enabling SQL-based exploration in **Athena**.  
+
+For long-term storage and heavy analytics, curated data is loaded into **Amazon Redshift**. The analytics layer uses **Amazon QuickSight**, **Tableau**, or **Power BI** to visualise KPIs like revenue, trips, passenger counts, and location trends.  
+
+**Monitoring and orchestration** is handled using **Apache Airflow (MWAA)** and **CloudWatch** for scheduling, logging, and alerts.  
 
 ---
 
